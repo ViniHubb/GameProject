@@ -1,13 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Screen from './src/Screen';
-import Keyboard from './src/keyboard';
+import { StyleSheet, View } from 'react-native';
+import Keyboard from './src/Keyboard'
 
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <Screen></Screen>
       <Keyboard></Keyboard>
     </View>
   );
