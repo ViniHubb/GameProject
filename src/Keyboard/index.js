@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { View, Button } from "react-native"
 import styles from "./styles"
-import Screen from "./Screen"
+import Screen from "../Screen"
 
 export default function Keyboard(){
   const [palpite, setPalpite] = useState([])
