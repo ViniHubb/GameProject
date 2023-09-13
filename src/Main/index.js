@@ -1,34 +1,33 @@
 import React, { useState } from "react"
-import { View, Button, Alert } from "react-native"
+import { View } from "react-native"
 import styles from "./styles"
-import Screen from "../Screen"
-import Title from "../Title"
-
+import Screen from "./Components/Screen"
+import Title from "./Components/Title"
+import Keyboard from "./Components/Keyboard"
 
 export default function Main(){
-  const [palpite, setPalpite] = useState([])
-  const [holmes, setHolmes] = useState([])
-  const [watson, setWatson] = useState([])
-  const [round, setRound] = useState(0)
-  const [superHitH, setSuperHitH] = useState(0)
-  const [hitH, setHitH] = useState(0)
-  const [missH, setMissH] = useState(3)
-  const [venceu, setVenceu] = useState(0)
-  const [nome, setNome] = useState("Escolha um valor Holmes")
+  const [palpite, setPalpite] = useState([])      // Variavel para o palpite atual
+  const [holmes, setHolmes] = useState([])        // Variavel para o numero escolido pelo jogador 1 
+  const [watson, setWatson] = useState([])        // Variavel para o numero escolido pelo jogador 2
+  const [round, setRound] = useState(0)           // Variavel para saber de quem é a vez 0 = jogador 1 e  1 = jogador 2
+  const [superHit, setSuperHit] = useState(0)   // Variavel para o numero de acertos em cheio
+  const [hit, setHit] = useState(0)             // Variavel para o numero de acertos
+  const [miss, setMiss] = useState(3)           // Variavel para o numero de erros
+  const [nome, setNome] = useState("Escolha um valor Holmes") // Variavel para mostrar na tela de quem e a vez e mostrar quem venceu
 
-  function preenche(number){
+  function preenche(number){        // Funcao para preencher a variavel 'palpite'
     let newPlapite = [...palpite]
     newPlapite.push(number)
     setPalpite(newPlapite)
   }
 
-  function delet(){
+  function delet(){                 // Funcao para deletar um numero
     let newPlapite = [...palpite]
     newPlapite.pop()
     setPalpite(newPlapite)
   }
 
-  function verifica(number){
+  function verifica(number){        // Funcao para garantir que o numero so seja apertado uma vez
     let flag = false
     if(palpite.includes(number) || palpite.length >= 3){
       flag = true
@@ -36,7 +35,7 @@ export default function Main(){
     return flag
   }
 
-  function salvar(flag){
+  function salvar(flag){            // Funcao para salvar o valor escolhido e enviar os palpites
     if(flag === 0){
       setHolmes(palpite)
       setNome("Escolha um valor Watson")
@@ -52,86 +51,65 @@ export default function Main(){
       console.log("Round:",  round%2)
       if(flag%2){
         setNome("É a vez de Holmes")
-        tentativaWatson()
+        tentativa(watson)  // A variavel do outro jogador deve ser analisada, nao a de quem e a vez
       }else{
         setNome("É a vez de Watson")
-        tentativaHolmes()
+        tentativa(holmes)  // A variavel do outro jogador deve ser analisada, nao a de quem e a vez
       }
     }
     setPalpite([])
   }
 
-  function tentativaHolmes(){
-    let SH=0
-    let H=0
-    let M=3
-    if(holmes.includes(palpite[0])){
-      H = 1
-      M -= 1
-      if(holmes[0] === palpite[0]){
-        H -= 1
-        SH = 1
-      }
-    }
-    if(holmes.includes(palpite[1])){
-      H += 1
-      M -= 1
-      if(holmes[1] === palpite[1]){
-        H -= 1
-        SH += 1
-      }
-    }
-    if(holmes.includes(palpite[2])){
-      H += 1
-      M -= 1
-      if(holmes[2] === palpite[2]){
-        H -= 1
-        SH += 1
-      }
-    }
-    setSuperHitH(SH)
-    setHitH(H)
-    setMissH(M)
-    if(SH === 3){
-      setVenceu(1)
-      setNome("Bravo!!")
-    }
+  function go(){        // Funcap para o botao enviar
+    salvar(round)
+    setRound(round + 1)
+  }
+  
+  function clear(){    // Funcao para o botao limpar 
+    setHolmes([])
+    setWatson([])
+    setPalpite([])
+    setRound(0)
+    setNome("Escolha um valor Holmes")
   }
 
-  function tentativaWatson(){
+  function tentativa(holmesORwatson){     // Funcao para calcular a tentativa do jogador atual
+    const tentativ = holmesORwatson
     let SH=0
     let H=0
     let M=3
-    if(watson.includes(palpite[0])){
+    if(tentativ.includes(palpite[0])){
       H = 1
       M -= 1
-      if(watson[0] === palpite[0]){
+      if(tentativ[0] === palpite[0]){
         H -= 1
         SH = 1
       }
     }
-    if(watson.includes(palpite[1])){
+    if(tentativ.includes(palpite[1])){
       H += 1
       M -= 1
-      if(watson[1] === palpite[1]){
+      if(tentativ[1] === palpite[1]){
         H -= 1
         SH += 1
       }
     }
-    if(watson.includes(palpite[2])){
+    if(tentativ.includes(palpite[2])){
       H += 1
       M -= 1
-      if(watson[2] === palpite[2]){
+      if(tentativ[2] === palpite[2]){
         H -= 1
         SH += 1
       }
     }
-    setSuperHitH(SH)
-    setHitH(H)
-    setMissH(M)
+    setSuperHit(SH)
+    setHit(H)
+    setMiss(M)
     if(SH === 3){
-      setVenceu(2)
-      setNome("Bravo!!")
+      if(round%2 === 0)
+        setNome("Holmes")
+      else
+        setNome("Watson")
     }
   }
 
@@ -141,106 +119,21 @@ export default function Main(){
         <Title nome={nome}></Title>
       </View>
       <View style={styles.boxScreen}>
-        <Screen valor={palpite} superHit={superHitH} hit={hitH} miss={missH} venceu={venceu}></Screen>
+        <Screen 
+          valor={palpite} 
+          superHit={superHit} 
+          hit={hit} 
+          miss={miss} 
+          name={nome}
+        />    
       </View>
-      <View style={styles.boxButtons}>
-        <View style={styles.line}>
-            <Button       // 1
-            title="Clcik 1"
-            onPress={() =>{
-            preenche(1)
-            }}
-            disabled={verifica(1)}
-            />
-            <Button       // 2
-            title="Clcik 2"
-            onPress={() =>{
-            preenche(2)
-            }}
-            disabled={verifica(2)}
-            />
-            <Button       // 3
-            title="Clcik 3"
-            onPress={() =>{
-            preenche(3)
-            }}
-            disabled={verifica(3)}
-            />
-        </View>
-        <View style={styles.line}>
-            <Button       // 4
-            title="Clcik 4"
-            onPress={() =>{
-            preenche(4)
-            }}
-            disabled={verifica(4)}
-            />
-            <Button       // 5
-            title="Clcik 5"
-            onPress={() =>{
-            preenche(5)
-            }}
-            disabled={verifica(5)}
-            />
-            <Button       // 6
-            title="Clcik 6"
-            onPress={() =>{
-            preenche(6)
-            }}
-            disabled={verifica(6)}
-            />
-        </View>
-        <View style={styles.line}>
-            <Button       // 7
-            title="Clcik 7"
-            onPress={() => {
-            preenche(7)
-            }}
-            disabled={verifica(7)}
-            />
-            <Button       // 8
-            title="Clcik 8"
-            onPress={() => {
-            preenche(8)
-            }}
-            disabled={verifica(8)}
-            />
-            <Button       // 9
-            title="Clcik 9"
-            onPress={() => {
-            preenche(9)
-            }}
-            disabled={verifica(9)}
-            />
-        </View>
-        <View style={styles.line}>
-            <Button       // Delet
-            title="Clcik Del"
-            onPress={() => {
-            delet()
-            }}
-            />
-            <Button       // Delet
-            title="CLear"
-            onPress={() => {
-            setHolmes([])
-            setWatson([])
-            setPalpite([])
-            setRound(0)
-            setVenceu(0)
-            setNome("Escolha um valor Holmes")
-            }}
-            />
-            <Button       // Go!
-            title="Clcik Go"
-            onPress={() => {
-            salvar(round)
-            setRound(round+1)
-            }}
-            disabled={!verifica(-1)}
-            />
-        </View>
-      </View>  
+      <Keyboard
+        bota={preenche} 
+        ve={verifica} 
+        dell={delet}
+        limpa={clear}
+        save={go}
+      />
     </View>
   )
 }

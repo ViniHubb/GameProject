@@ -5,13 +5,9 @@ import styles from "./styles";
 export default function Screen(props){
   return(
     <View>  
-      {props.venceu ?
+      {(props.name).length < 7 ?
       <View style={styles.boxValue} >
-        {props.venceu === 1 ?
-        <Text style={styles.value} >Parabens Holmes, você acertou</Text>
-        :
-        <Text style={styles.value} >Parabens Watson, você acertou</Text>
-        }
+        <Text style={styles.value} >Parabens {props.name}, você acertou</Text>
       </View>
       :
       <View style={styles.boxValue} >

@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     padding:4,
     fontWeight: "bold"
   },
-  freedback:{
+  feedback:{
     fontSize: 16
   }
 })
