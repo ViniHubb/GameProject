@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+  boxMain:{
+    alignItems: "center",
+    justifyContent: "center"
+  },
   boxButtons:{
     width: "60%",
     height: 200,

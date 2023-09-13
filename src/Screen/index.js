@@ -16,9 +16,9 @@ export default function Screen(props){
       :
       <View style={styles.boxValue} >
       <Text style={styles.value} >{props.valor}</Text>
-      <Text style={styles.value} >Super Hit: {props.superHit}</Text>
-      <Text style={styles.value} >Hit: {props.hit}</Text>
-      <Text style={styles.value} >Miss: {props.miss}</Text>
+      <Text style={styles.feedback} >Super Hit: {props.superHit}</Text>
+      <Text style={styles.feedback} >Hit: {props.hit}</Text>
+      <Text style={styles.feedback} >Miss: {props.miss}</Text>
     </View>
     }
     </View>

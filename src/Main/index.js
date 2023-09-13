@@ -1,9 +1,11 @@
 import React, { useState } from "react"
-import { View, Button } from "react-native"
+import { View, Button, Alert } from "react-native"
 import styles from "./styles"
 import Screen from "../Screen"
+import Title from "../Title"
 
-export default function Keyboard(){
+
+export default function Main(){
   const [palpite, setPalpite] = useState([])
   const [holmes, setHolmes] = useState([])
   const [watson, setWatson] = useState([])
@@ -12,6 +14,7 @@ export default function Keyboard(){
   const [hitH, setHitH] = useState(0)
   const [missH, setMissH] = useState(3)
   const [venceu, setVenceu] = useState(0)
+  const [nome, setNome] = useState("Escolha um valor Holmes")
 
   function preenche(number){
     let newPlapite = [...palpite]
@@ -36,9 +39,11 @@ export default function Keyboard(){
   function salvar(flag){
     if(flag === 0){
       setHolmes(palpite)
+      setNome("Escolha um valor Watson")
     }
-    if(flag === 1){
+    else if(flag === 1){
       setWatson(palpite)
+      setNome("É a vez de Holmes")
     }
     else{
       console.log("Holmes: ",holmes)
@@ -46,8 +51,10 @@ export default function Keyboard(){
       console.log("Palpite:",palpite)
       console.log("Round:",  round%2)
       if(flag%2){
+        setNome("É a vez de Holmes")
         tentativaWatson()
       }else{
+        setNome("É a vez de Watson")
         tentativaHolmes()
       }
     }
@@ -87,6 +94,7 @@ export default function Keyboard(){
     setMissH(M)
     if(SH === 3){
       setVenceu(1)
+      setNome("Bravo!!")
     }
   }
 
@@ -123,11 +131,15 @@ export default function Keyboard(){
     setMissH(M)
     if(SH === 3){
       setVenceu(2)
+      setNome("Bravo!!")
     }
   }
 
   return(
-    <View>
+    <View style={styles.boxMain}>
+      <View style={styles.boxScreen}>
+        <Title nome={nome}></Title>
+      </View>
       <View style={styles.boxScreen}>
         <Screen valor={palpite} superHit={superHitH} hit={hitH} miss={missH} venceu={venceu}></Screen>
       </View>
@@ -216,6 +228,7 @@ export default function Keyboard(){
             setPalpite([])
             setRound(0)
             setVenceu(0)
+            setNome("Escolha um valor Holmes")
             }}
             />
             <Button       // Go!
