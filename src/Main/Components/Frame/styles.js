@@ -2,17 +2,21 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   boxValue:{
+    height: "60%",
+    backgroundColor: "white",
+    marginBottom: 2,
+    flexDirection: "row"
+  },
+  area:{
+    width: "50%",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "lightgray",
-    marginBottom: 100,
-    padding:10
+    marginRight: 1
   },
   value:{
-    fontSize: 16,
-    backgroundColor: "white",
-    padding:4,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontSize: 16
   }
 })
 
