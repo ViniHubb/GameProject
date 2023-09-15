@@ -4,7 +4,6 @@ import styles from "./styles"
 import Title from "./Components/Title"
 import Keyboard from "./Components/Keyboard"
 import Frame from "./Components/Frame"
-import Feedback from "../Feedback"
 
 export default function Main({ navigation }) {
 
@@ -16,6 +15,8 @@ export default function Main({ navigation }) {
   const [hit, setHit] = useState(0)             // Variavel para o numero de acertos
   const [miss, setMiss] = useState(3)           // Variavel para o numero de erros
   const [nome, setNome] = useState("Escolha um valor Holmes") // Variavel para mostrar na tela de quem e a vez e mostrar quem venceu
+  const [level, setLevel] = useState(2)
+
 
   function preenche(number) {        // Funcao para preencher a variavel 'palpite'
     let newPlapite = [...palpite]
@@ -31,7 +32,7 @@ export default function Main({ navigation }) {
 
   function verifica(number) {        // Funcao para garantir que o numero so seja apertado uma vez
     let flag = false
-    if (palpite.includes(number) || palpite.length >= 3) {
+    if (palpite.includes(number) || palpite.length >= level) {
       flag = true
     }
     return flag
@@ -79,14 +80,12 @@ export default function Main({ navigation }) {
     }
   },[round])
 
-  function clear() {    // Funcao para o botao limpar 
+  function clear() {       // Funcao para o botao limpar 
     setHolmes([])
     setWatson([])
     setPalpite([])
-    setSuperHit(0)
-    setHit(0)
-    setMiss(3)
     setRound(0)
+    setLevel(2)
     setNome("Escolha um valor Holmes")
   }
 
@@ -94,35 +93,22 @@ export default function Main({ navigation }) {
     const tentativ = holmesORwatson
     let SH = 0
     let H = 0
-    let M = 3
-    if (tentativ.includes(palpite[0])) {
-      H = 1
-      M -= 1
-      if (tentativ[0] === palpite[0]) {
-        H -= 1
-        SH = 1
-      }
-    }
-    if (tentativ.includes(palpite[1])) {
-      H += 1
-      M -= 1
-      if (tentativ[1] === palpite[1]) {
-        H -= 1
-        SH += 1
-      }
-    }
-    if (tentativ.includes(palpite[2])) {
-      H += 1
-      M -= 1
-      if (tentativ[2] === palpite[2]) {
-        H -= 1
-        SH += 1
+    let M = level
+    for (let i=0; i<level; i++) {
+      if (tentativ.includes(palpite[i])) {
+        H += 1
+        M -= 1
+        if (tentativ[i] === palpite[i]) {
+          H -= 1
+          SH += 1
+        }
       }
     }
     setSuperHit(SH)
     setHit(H)
     setMiss(M)
-    if (SH === 3) {
+    if (SH === level) {
+      setLevel(level+1)
       if (round % 2 === 0)
         setNome("Holmes")
       else
@@ -132,16 +118,10 @@ export default function Main({ navigation }) {
 
   return (
     <View style={styles.boxMain}>
-      <View>
-        <Title nome={nome}></Title>
-      </View>
-      <View>
         <Frame
           valor={palpite}
           name={nome}
         />
-      </View>
-      <View>
         <Keyboard
           bota={preenche}
           ve={verifica}
@@ -149,7 +129,6 @@ export default function Main({ navigation }) {
           limpa={clear}
           save={salvar}
         />
-      </View>
     </View>
   )
 }
