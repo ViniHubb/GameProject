@@ -1,10 +1,11 @@
 import React from "react"
 import { View, Text, Button } from "react-native"
+import styles from "./styles"
 
 export default function Feedback({ navigation, route }) {
   return (
-    <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
-      {(route.params.renome).length > 7 ?
+    <View style={styles.boxFeedback}>
+      {route.params.misses || route.params.hits ?
         <View>
           <Text>Super Hit: {route.params.superHits}</Text>
           <Text>Hit: {route.params.hits}</Text>
@@ -16,16 +17,14 @@ export default function Feedback({ navigation, route }) {
         </View>
         :
         <View>
-        <Text>Parabéns {route.params.renome}, você acertou</Text>
-        <View style={{ alignContent: "center", justifyContent: "space-between", flexDirection: "row" }}>
+          <Text>Parabéns {route.params.renome}, você acertou</Text>
           <Text>Holmes{'\n'}{route.params.holmesP}</Text>
           <Text>Watson{'\n'}{route.params.watsonP}</Text>
+          <Button
+            title="PROXIMO"
+            onPress={() => navigation.navigate("Main")}
+          />
         </View>
-        <Button
-          title="PROXIMO"
-          onPress={() => navigation.navigate("Main")}
-        />
-      </View>
       }
     </View>
   )
