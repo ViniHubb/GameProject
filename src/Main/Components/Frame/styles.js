@@ -13,9 +13,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding:4,
     fontWeight: "bold"
-  },
-  feedback:{
-    fontSize: 16
   }
 })
 
