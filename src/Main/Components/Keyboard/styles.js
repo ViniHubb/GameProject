@@ -2,16 +2,15 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   boxButtons:{
-    width: "60%",
-    height: 200,
-    justifyContent: "space-between",
+    height: "100%",
     backgroundColor: "lightgray",
-    flexDirection: "colum"
+    paddingTop: 10
   },
   line:{
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     backgroundColor: "lightgray",
-    flexDirection: "row"
+    flexDirection: "row",
+    padding: 5
   }
 })
 

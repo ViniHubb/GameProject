@@ -1,10 +1,10 @@
-import React, { useState } from "react"
-import { Text, View, Button } from "react-native"
+import React from "react"
+import { View, Button } from "react-native"
 import styles from "./styles"
 
 export default function Keyboard(props) {
   return (
-    <View>
+    <View style={styles.boxButtons}>
       <View style={styles.line}>
         <Button       // 1
           title="Clcik 1"
