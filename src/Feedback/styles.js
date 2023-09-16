@@ -7,7 +7,16 @@ const styles = StyleSheet.create({
     alignItems: "center", 
     justifyContent: "center",
     backgroundColor: "lightgray",
-
+  },
+  try:{
+    height: 120,
+    justifyContent: "space-between",
+  },
+  escolhas:{
+    flexDirection: "row",
+    alignItems: "center", 
+    justifyContent: "space-between",
+    paddingVertical: 10
   }
 })
 

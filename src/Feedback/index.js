@@ -6,7 +6,7 @@ export default function Feedback({ navigation, route }) {
   return (
     <View style={styles.boxFeedback}>
       {route.params.misses || route.params.hits ?
-        <View>
+        <View style={styles.try}>
           <Text>Super Hit: {route.params.superHits}</Text>
           <Text>Hit: {route.params.hits}</Text>
           <Text>Miss: {route.params.misses}</Text>
@@ -18,8 +18,10 @@ export default function Feedback({ navigation, route }) {
         :
         <View>
           <Text>Parabéns {route.params.renome}, você acertou</Text>
-          <Text>Holmes{'\n'}{route.params.holmesP}</Text>
-          <Text>Watson{'\n'}{route.params.watsonP}</Text>
+          <View style={styles.escolhas}>  
+            <Text>Holmes: {route.params.holmesP}</Text>
+            <Text>Watson: {route.params.watsonP}</Text>
+          </View>
           <Button
             title="PROXIMO"
             onPress={() => navigation.navigate("Main")}
