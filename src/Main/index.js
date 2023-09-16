@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { View, Button } from "react-native"
+import { View, Button, SafeAreaView, StatusBar } from "react-native"
 import styles from "./styles"
 import Title from "./Components/Title"
 import Keyboard from "./Components/Keyboard"
@@ -52,7 +52,8 @@ export default function Main({ navigation }) {
       console.log("Holmes: ", holmes)
       console.log("Watson: ", watson)
       console.log("Palpite:", palpite)
-      console.log("Round:", round % 2, round)
+      console.log("Round:", round)
+      console.log("Level:", level)
 
       if (round % 2) {
         setNome("É a vez de Holmes")
@@ -61,7 +62,6 @@ export default function Main({ navigation }) {
         setNome("É a vez de Watson")
         tentativa(watson)  
       }
-      console.log("Nome:", nome)
     }
     setPalpite([])
     setRound(round + 1)
@@ -79,6 +79,10 @@ export default function Main({ navigation }) {
       })
     }
   },[round])
+
+  useEffect(() => {
+    setRound(0)
+  },[level])
 
   function clear() {       // Funcao para o botao limpar 
     setHolmes([])
@@ -117,18 +121,27 @@ export default function Main({ navigation }) {
   }
 
   return (
-    <View style={styles.boxMain}>
-        <Frame
-          valor={palpite}
-          name={nome}
-        />
-        <Keyboard
-          bota={preenche}
-          ve={verifica}
-          dell={delet}
-          limpa={clear}
-          save={salvar}
-        />
-    </View>
+    <SafeAreaView style={styles.boxMain}>
+      <StatusBar 
+        backgroundColor= "lightgray"
+        barStyle= "dark-content"
+        showHideTransition= "slide"
+        animated={true}
+        hidden={false}
+        translucent={false}
+      />
+      <Frame
+        valor={palpite}
+        name={nome}
+        nivel={level}
+      />
+      <Keyboard
+        bota={preenche}
+        ve={verifica}
+        dell={delet}
+        limpa={clear}
+        save={salvar}
+      />
+    </SafeAreaView>
   )
 }

@@ -15,6 +15,20 @@ export default function Frame(props) {
       }}>
         <Text style={styles.value} >{props.valor[1]}</Text>
       </Pressable>
+      {props.nivel > 2 &&
+        <Pressable style={styles.area} onPress={() => {
+          console.log("3");
+        }}>
+          <Text style={styles.value} >{props.valor[2]}</Text>
+        </Pressable>
+      }
+      {props.nivel > 3 &&
+        <Pressable style={styles.area} onPress={() => {
+          console.log("4");
+        }}>
+          <Text style={styles.value} >{props.valor[3]}</Text>
+        </Pressable>
+      }
     </View>
   )
 }
