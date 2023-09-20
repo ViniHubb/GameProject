@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
-import { View, Button, SafeAreaView, StatusBar } from "react-native"
+import { View, SafeAreaView, StatusBar } from "react-native"
 import styles from "./styles"
-import Title from "./Components/Title"
 import Keyboard from "./Components/Keyboard"
 import Frame from "./Components/Frame"
 
@@ -15,8 +14,7 @@ export default function Main({ navigation }) {
   const [hit, setHit] = useState(0)             // Variavel para o numero de acertos
   const [miss, setMiss] = useState(3)           // Variavel para o numero de erros
   const [nome, setNome] = useState("Escolha um valor Holmes") // Variavel para mostrar na tela de quem e a vez e mostrar quem venceu
-  const [level, setLevel] = useState(2)
-
+  const [level, setLevel] = useState(2)         // Variavel que indica o nivel atual
 
   function preenche(number) {        // Funcao para preencher a variavel 'palpite'
     let newPlapite = [...palpite]
@@ -38,14 +36,16 @@ export default function Main({ navigation }) {
     return flag
   }
 
-  async function salvar() {             // Funcao para salvar o valor escolhido e enviar os palpites
+  function salvar() {             // Funcao para salvar o valor escolhido e enviar os palpites
     if (round === 0) {
       setHolmes(palpite)
+      setRound(round + 1)
       setNome("Escolha um valor Watson")
     }
     else if (round === 1) {
       setWatson(palpite)
-      setNome("É a vez de Holmes")
+      setRound(round + 1)
+      setNome("Holmes")
     }
     else {
 
@@ -56,33 +56,15 @@ export default function Main({ navigation }) {
       console.log("Level:", level)
 
       if (round % 2) {
-        setNome("É a vez de Holmes")
+        setNome("Holmes")
         tentativa(holmes)  
       } else {
-        setNome("É a vez de Watson")
+        setNome("Watson")
         tentativa(watson)  
       }
     }
     setPalpite([])
-    setRound(round + 1)
   }
-
-  useEffect(() => {                   // Envia para "Fedback" as informações necessarias, sem delay
-    if (round > 2) { 
-      navigation.navigate("Feedback", {
-        superHits: superHit,
-        hits: hit,
-        misses: miss,
-        renome: nome,
-        holmesP: holmes,
-        watsonP: watson
-      })
-    }
-  },[round])
-
-  useEffect(() => {
-    setRound(0)
-  },[level])
 
   function clear() {       // Funcao para o botao limpar 
     setHolmes([])
@@ -113,12 +95,42 @@ export default function Main({ navigation }) {
     setMiss(M)
     if (SH === level) {
       setLevel(level+1)
+      setRound(0)
       if (round % 2 === 0)
         setNome("Holmes")
       else
         setNome("Watson")
+    } else {
+      setRound(round + 1)
     }
   }
+
+  function bomb() {
+    setNome("BUMM")
+    navigation.navigate("Feedback", {
+      superHits: -1,
+      hits: 0,
+      misses: 0,
+      renome: nome,
+      holmesP: holmes,
+      watsonP: watson
+    })
+    setLevel(level+1)
+  }
+
+  useEffect(() => {                   // Envia para "Fedback" as informações necessarias, sem delay
+    if (round > 2 || superHit === level-1) { 
+      navigation.navigate("Feedback", {
+        superHits: superHit,
+        hits: hit,
+        misses: miss,
+        renome: nome,
+        holmesP: holmes,
+        watsonP: watson
+      })
+      setSuperHit(0)
+    }
+  },[round])
 
   return (
     <SafeAreaView style={styles.boxMain}>
@@ -134,10 +146,12 @@ export default function Main({ navigation }) {
         valor={palpite}
         name={nome}
         nivel={level}
+        rodada={round}
+        bomba={bomb}
       />
       <Keyboard
         bota={preenche}
-        ve={verifica}
+        ver={verifica}
         dell={delet}
         limpa={clear}
         save={salvar}

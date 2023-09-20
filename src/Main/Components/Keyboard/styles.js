@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   boxButtons:{
-    height: "100%",
+    flex: 1,
     backgroundColor: "lightgray",
     paddingTop: 10
   },

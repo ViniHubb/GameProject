@@ -11,21 +11,21 @@ export default function Keyboard(props) {
           onPress={() => {
             props.bota(1)
           }}
-          disabled={props.ve(1)}
+          disabled={props.ver(1)}
         />
         <Button       // 2
           title="Clcik 2"
           onPress={() => {
             props.bota(2)
           }}
-          disabled={props.ve(2)}
+          disabled={props.ver(2)}
         />
         <Button       // 3
           title="Clcik 3"
           onPress={() => {
             props.bota(3)
           }}
-          disabled={props.ve(3)}
+          disabled={props.ver(3)}
         />
       </View>
       <View style={styles.line}>
@@ -34,21 +34,21 @@ export default function Keyboard(props) {
           onPress={() => {
             props.bota(4)
           }}
-          disabled={props.ve(4)}
+          disabled={props.ver(4)}
         />
         <Button       // 5
           title="Clcik 5"
           onPress={() => {
             props.bota(5)
           }}
-          disabled={props.ve(5)}
+          disabled={props.ver(5)}
         />
         <Button       // 6
           title="Clcik 6"
           onPress={() => {
             props.bota(6)
           }}
-          disabled={props.ve(6)}
+          disabled={props.ver(6)}
         />
       </View>
       <View style={styles.line}>
@@ -57,21 +57,21 @@ export default function Keyboard(props) {
           onPress={() => {
             props.bota(7)
           }}
-          disabled={props.ve(7)}
+          disabled={props.ver(7)}
         />
         <Button       // 8
           title="Clcik 8"
           onPress={() => {
             props.bota(8)
           }}
-          disabled={props.ve(8)}
+          disabled={props.ver(8)}
         />
         <Button       // 9
           title="Clcik 9"
           onPress={() => {
             props.bota(9)
           }}
-          disabled={props.ve(9)}
+          disabled={props.ver(9)}
         />
       </View>
       <View style={styles.line}>
@@ -92,7 +92,7 @@ export default function Keyboard(props) {
           onPress={() => {
             props.save()
           }}
-          disabled={!props.ve(-1)}
+          disabled={!props.ver(-1)}
         />
       </View>
     </View>
