@@ -9,8 +9,8 @@ export default function Feedback({ navigation, route }) {
   useEffect(() => {
     setTimeout(() => {
       setAble(false)
-    },2000)
-  },[route.params.renome])
+    }, 2000)
+  }, [route.params.renome])
 
   return (
     <View style={styles.boxFeedback}>
@@ -27,16 +27,30 @@ export default function Feedback({ navigation, route }) {
         </View>
         :
         <View>
-          {route.params.superHits < 0 ?
+          {route.params.superHits > route.params.nivel-1 ?
             <View>
               <Text>A bomba explodiu, parabéns {route.params.renome}, você perdeu</Text>
               <View style={styles.escolhas}>
                 <Text>Holmes: {route.params.holmesP}</Text>
                 <Text>Watson: {route.params.watsonP}</Text>
               </View>
+              <View style={styles.escolhas}>
+                <Text>Pontos: {route.params.pontosTotaisH}</Text>
+                <Text>Pontos: {route.params.pontosTotaisW}</Text>
+              </View>
               <Button
                 title="PROXIMO"
-                onPress={() => navigation.navigate("Main")}
+                onPress={() => {
+                  if(route.params.nivel < 5) {
+                    navigation.navigate("Main")
+                  } else {
+                    navigation.navigate("Final", {
+                      nome: route.params.renome,
+                      holmes: route.params.pontosTotaisH,
+                      watson: route.params.pontosTotaisW
+                    })
+                  }
+                }}
               />
             </View>
             :
@@ -46,9 +60,24 @@ export default function Feedback({ navigation, route }) {
                 <Text>Holmes: {route.params.holmesP}</Text>
                 <Text>Watson: {route.params.watsonP}</Text>
               </View>
+              <View style={styles.escolhas}>
+                <Text>Pontos: {route.params.pontosTotaisH}</Text>
+                <Text>Pontos: {route.params.pontosTotaisW}</Text>
+              </View>
               <Button
                 title="PROXIMO"
-                onPress={() => navigation.navigate("Main")}
+                onPress={() => {
+                  if(route.params.nivel < 5) {
+                    navigation.navigate("Main")
+                  } else {
+                    navigation.navigate("Final", {
+                      nome: route.params.renome,
+                      holmes: route.params.pontosTotaisH,
+                      watson: route.params.pontosTotaisW
+                    })
+                  }
+                }}
+
               />
             </View>
           }

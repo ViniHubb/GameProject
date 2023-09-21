@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Main from './src/Main'
 import Feedback from './src/Feedback';
+import Final from './src/Final'
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,13 @@ export default function App() {
           <Stack.Screen
             name='Feedback'
             component={Feedback}
+            options={{
+              headerShown: false
+            }}
+          />
+          <Stack.Screen
+            name='Final'
+            component={Final}
             options={{
               headerShown: false
             }}
