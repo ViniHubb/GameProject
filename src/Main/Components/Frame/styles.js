@@ -7,9 +7,9 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   bomb:{
-    height: "80%",
     width: "100%",
-    backgroundColor: "lightgray",
+    height: 225,
+    backgroundColor: "gray",
     alignItems: "center",
     justifyContent: "center",
   },

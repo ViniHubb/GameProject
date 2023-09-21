@@ -15,6 +15,8 @@ export default function Main({ navigation }) {
   const [miss, setMiss] = useState(3)           // Variavel para o numero de erros
   const [nome, setNome] = useState("Escolha um valor Holmes") // Variavel para mostrar na tela de quem e a vez e mostrar quem venceu
   const [level, setLevel] = useState(2)         // Variavel que indica o nivel atual
+  const [pontosH, setPontosH] = useState(0)       // Variavel para os pontos do jogador 1
+  const [pontosW, setPontosW] = useState(0)      // Variavel para os pontos do jogador 2
 
   function preenche(number) {        // Funcao para preencher a variavel 'palpite'
     let newPlapite = [...palpite]
@@ -40,7 +42,7 @@ export default function Main({ navigation }) {
     if (round === 0) {
       setHolmes(palpite)
       setRound(round + 1)
-      setNome("Escolha um valor Watson")
+      setNome("Watson")
     }
     else if (round === 1) {
       setWatson(palpite)
@@ -56,10 +58,10 @@ export default function Main({ navigation }) {
       console.log("Level:", level)
 
       if (round % 2) {
-        setNome("Holmes")
+        setNome("Watson")
         tentativa(holmes)  
       } else {
-        setNome("Watson")
+        setNome("Holmes")
         tentativa(watson)  
       }
     }
@@ -71,6 +73,8 @@ export default function Main({ navigation }) {
     setWatson([])
     setPalpite([])
     setRound(0)
+    setPontosH(0)
+    setPontosW(0)
     setLevel(2)
     setNome("Escolha um valor Holmes")
   }
@@ -93,42 +97,79 @@ export default function Main({ navigation }) {
     setSuperHit(SH)
     setHit(H)
     setMiss(M)
-    if (SH === level) {
+    if (SH === level && level < 5) {
+      pontuacao()
       setLevel(level+1)
       setRound(0)
-      if (round % 2 === 0)
-        setNome("Holmes")
-      else
-        setNome("Watson")
-    } else {
+    } else if (level < 5){
       setRound(round + 1)
     }
   }
 
   function bomb() {
-    setNome("BUMM")
-    navigation.navigate("Feedback", {
-      superHits: -1,
-      hits: 0,
-      misses: 0,
-      renome: nome,
-      holmesP: holmes,
-      watsonP: watson
-    })
+    pontuacao(1)
+    setSuperHit(level+1)
+    setHit(0)
+    setMiss(0)
     setLevel(level+1)
+    setRound(0)
   }
 
-  useEffect(() => {                   // Envia para "Fedback" as informações necessarias, sem delay
-    if (round > 2 || superHit === level-1) { 
+  function pontuacao(bomba=0) {
+    let pontos = level*100
+    if (!bomba) {
+      for (let i = 0; i < round && i < 7+4*level; i++) {
+        pontos -= Math.round((i*i)/(3*level))
+      }
+      if (round % 2 === 0) {
+        setPontosH(pontosH+pontos)
+        pontos = pontosH+pontos
+        if (level > 3 && pontos < pontosW) {
+          setNome("Watson")
+        }
+      } else {
+        setPontosW(pontosW+pontos)
+        pontos = pontosW+pontos
+        if (level > 3 && pontos < pontosH) {
+          setNome("Holmes")
+        }
+      }
+    } else {
+      pontos -= round*10
+      if (round % 2) {
+        setPontosH(pontosH+pontos)
+        pontos = pontosH+pontos
+        if (level > 3 && pontos < pontosW) {
+          setNome("Holmes")
+        }
+      } else {
+        setPontosW(pontosW+pontos)
+        pontos = pontosW+pontos
+        if (level > 3 && pontos < pontosH) {
+          setNome("Watson")
+        }
+      }
+    }
+  }
+
+  useEffect(() => {     // Envia para "Fedback" as informações necessarias, sem delay
+    if (round > 2 || superHit >= level-1) {
+      console.log(superHit)
       navigation.navigate("Feedback", {
         superHits: superHit,
         hits: hit,
         misses: miss,
         renome: nome,
         holmesP: holmes,
-        watsonP: watson
+        watsonP: watson,
+        nivel: level,
+        pontosTotaisH: pontosH,
+        pontosTotaisW: pontosW
       })
       setSuperHit(0)
+      if(level > 4){
+        clear()
+      }
     }
   },[round])
 

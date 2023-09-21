@@ -1,99 +1,130 @@
 import React from "react"
-import { View, Button } from "react-native"
+import { View, Text, TouchableOpacity } from "react-native"
 import styles from "./styles"
 
 export default function Keyboard(props) {
   return (
     <View style={styles.boxButtons}>
       <View style={styles.line}>
-        <Button       // 1
-          title="Clcik 1"
+      <TouchableOpacity       // 0
+          onPress={() => {
+            props.bota(0)
+          }}
+          disabled={props.ver(0)}
+          style={{backgroundColor:"white", width: 20}}
+        >
+          <Text></Text></TouchableOpacity>
+        <TouchableOpacity       // 1
           onPress={() => {
             props.bota(1)
           }}
           disabled={props.ver(1)}
-        />
-        <Button       // 2
-          title="Clcik 2"
+          style={{backgroundColor:"white", width: 20}}       
+        >
+          <Text></Text></TouchableOpacity>
+        <TouchableOpacity       // 2
+          title="       "
           onPress={() => {
             props.bota(2)
           }}
           disabled={props.ver(2)}
-        />
-        <Button       // 3
-          title="Clcik 3"
+          style={{backgroundColor:"white", width: 20}}      
+        >
+          <Text></Text></TouchableOpacity>
+        <TouchableOpacity       // 3
+          title="       "
           onPress={() => {
             props.bota(3)
           }}
           disabled={props.ver(3)}
-        />
+          style={{backgroundColor:"white", width: 20}}        
+        >
+          <Text></Text></TouchableOpacity>
       </View>
       <View style={styles.line}>
-        <Button       // 4
-          title="Clcik 4"
+        <TouchableOpacity       // 4
+          title="       "
           onPress={() => {
             props.bota(4)
           }}
           disabled={props.ver(4)}
-        />
-        <Button       // 5
-          title="Clcik 5"
+          style={{backgroundColor:"white", width: 20}}
+        >
+          <Text></Text></TouchableOpacity>
+        <TouchableOpacity       // 5
+          title="       "
           onPress={() => {
             props.bota(5)
           }}
           disabled={props.ver(5)}
-        />
-        <Button       // 6
-          title="Clcik 6"
+          style={{backgroundColor:"white", width: 20}}        
+        >
+          <Text></Text></TouchableOpacity>
+        <TouchableOpacity       // 6
+          title="       "
           onPress={() => {
             props.bota(6)
           }}
           disabled={props.ver(6)}
-        />
-      </View>
-      <View style={styles.line}>
-        <Button       // 7
-          title="Clcik 7"
+          style={{backgroundColor:"white", width: 20}}       
+        >
+          <Text></Text></TouchableOpacity>
+        <TouchableOpacity       // 7
+          title="       "
           onPress={() => {
             props.bota(7)
           }}
           disabled={props.ver(7)}
-        />
-        <Button       // 8
-          title="Clcik 8"
+          style={{backgroundColor:"white", width: 20}}
+        >
+          <Text></Text></TouchableOpacity>
+      </View>
+      <View style={styles.line}>
+        <TouchableOpacity       // Delet
+          title="Del"
+          onPress={() => {
+            props.dell()
+          }}
+          style={{backgroundColor:"white", width: 20}}
+        >
+          <Text></Text></TouchableOpacity>
+        <TouchableOpacity       // 8
+          title="       "
           onPress={() => {
             props.bota(8)
           }}
           disabled={props.ver(8)}
-        />
-        <Button       // 9
-          title="Clcik 9"
+          style={{backgroundColor:"white", width: 20}}
+        >
+          <Text></Text></TouchableOpacity>
+        <TouchableOpacity       // 9
+          title="       "
           onPress={() => {
             props.bota(9)
           }}
           disabled={props.ver(9)}
-        />
-      </View>
-      <View style={styles.line}>
-        <Button       // Delet
-          title="Clcik Del"
-          onPress={() => {
-            props.dell()
-          }}
-        />
-        <Button       // Clear
-          title="CLear"
-          onPress={() => {
-            props.limpa()
-          }}
-        />
-        <Button       // Go!
-          title="Clcik Go"
+          style={{backgroundColor:"white", width: 20}}
+        >
+          <Text></Text></TouchableOpacity>
+        <TouchableOpacity       // Go!
+          title=" Go "
           onPress={() => {
             props.save()
           }}
-          disabled={!props.ver(-1)}
-        />
+          disabled={props.ver(-1)}
+          style={{backgroundColor:"white", width: 20}}
+        >
+          <Text></Text></TouchableOpacity>
+      </View>
+      <View style={[styles.line,{marginTop: 15}]}>
+        <TouchableOpacity       // Clear
+          title="       CLear       "
+          onPress={() => {
+            props.limpa()
+          }}
+          style={{backgroundColor:"white", width: 20}}    
+        >
+          <Text></Text></TouchableOpacity>
       </View>
     </View>
   )

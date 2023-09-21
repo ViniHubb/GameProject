@@ -69,10 +69,10 @@ export default function Frame(props) {
 
   const clear = () => {
     stopTimer()
-    setSecondsH(40)
-    setMinutesH(0)
-    setSecondsW(50)
-    setMinutesW(0)
+    setSecondsH(0)
+    setMinutesH(1)
+    setSecondsW(0)
+    setMinutesW(1)
   }
 
   useEffect(() => {     // Tempo acabou, bomba explodiu
@@ -101,10 +101,10 @@ export default function Frame(props) {
     }
   }, [props.valor])
 
-  useEffect(() => {     // Função que troca os relogios
+  useEffect(() => {       // Função que troca os relogios
     if(props.rodada === 2){
       startTimer()
-    } else if(props.rodada > 2 && 1){
+    } else if(props.rodada > 2){
       stopTimer()
       setTimeout(() => {
         startTimer()
@@ -119,35 +119,35 @@ export default function Frame(props) {
     setMinutesW(props.nivel-1)
     setSecondsW(0)
   },[props.nivel])
-    
+
   return (
     <View style={styles.boxFrame} >
       <ImageBackground source={require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/bomb.png')}
         style={styles.bomb}
       >
         {props.rodada%2 === 1 ?
-          <Text style={{ paddingBottom: 100, paddingRight: 30, fontSize: 70 }}>
+          <Text style={{paddingRight: 15, fontSize: 50 }}>
           {"0" + minutesW}:
           {secondsW< 10 ? "0" + secondsW : secondsW}
           </Text>
           :
-          <Text style={{ paddingBottom: 100, paddingRight: 30, fontSize: 70 }}>
+          <Text style={{paddingRight: 15, fontSize: 50 }}>
             {"0" + minutesH}:
             {secondsH < 10 ? "0" + secondsH : secondsH}
           </Text>
         }
       </ImageBackground>
       <View style={styles.boxWires}>
-        <Image source={fios[0]} style={styles.wire} />
-        <Image source={fios[1]} style={styles.wire} />
-        <Image source={fios[2]} style={styles.wire} />
-        <Image source={fios[3]} style={styles.wire} />
-        <Image source={fios[4]} style={styles.wire} />
-        <Image source={fios[5]} style={styles.wire} />
-        <Image source={fios[6]} style={styles.wire} />
-        <Image source={fios[7]} style={styles.wire} />
-        <Image source={fios[8]} style={styles.wire} />
-        <Image source={fios[9]} style={styles.wire} />
+        <Image source={fios[0]} style={[styles.wire, {backgroundColor:"white"}]} />
+        <Image source={fios[1]} style={[styles.wire, {backgroundColor:"blue"}]} />
+        <Image source={fios[2]} style={[styles.wire, {backgroundColor:"red"}]} />
+        <Image source={fios[3]} style={[styles.wire, {backgroundColor:"green"}]} />
+        <Image source={fios[4]} style={[styles.wire, {backgroundColor:"yellow"}]} />
+        <Image source={fios[5]} style={[styles.wire, {backgroundColor:"brown"}]} />
+        <Image source={fios[6]} style={[styles.wire, {backgroundColor:"gray"}]} />
+        <Image source={fios[7]} style={[styles.wire, {backgroundColor:"purple"}]} />
+        <Image source={fios[8]} style={[styles.wire, {backgroundColor:"violet"}]} />
+        <Image source={fios[9]} style={[styles.wire, {backgroundColor:"aqua"}]} />
       </View>
       {/* <Button
         title="Descontar"
