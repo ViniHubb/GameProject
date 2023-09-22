@@ -1,8 +1,11 @@
-import React from "react"
-import { View, Text, TouchableOpacity } from "react-native"
+import React, { useEffect, useState } from "react"
+import { View, Text, TouchableOpacity, Button, Image } from "react-native"
 import styles from "./styles"
 
 export default function Keyboard(props) {
+
+  const [botao, setBotao] = useState(require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/sombra.png'))
+
   return (
     <View style={styles.boxButtons}>
       <View style={styles.line}>
@@ -11,120 +14,137 @@ export default function Keyboard(props) {
             props.bota(0)
           }}
           disabled={props.ver(0)}
-          style={{backgroundColor:"white", width: 20}}
+          style={[styles.testes]}
+          activeOpacity={1}
         >
-          <Text></Text></TouchableOpacity>
+          <Image resizeMode="stretch" source={require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/sombra.png')}
+          style={{width:30, height: 20, backgroundColor: "white"}}/>
+        </TouchableOpacity>
         <TouchableOpacity       // 1
           onPress={() => {
             props.bota(1)
           }}
+          activeOpacity={1}
           disabled={props.ver(1)}
-          style={{backgroundColor:"white", width: 20}}       
+          style={[styles.testes]}       
         >
-          <Text></Text></TouchableOpacity>
+          <Image resizeMode="stretch" source={botao} 
+          style={{width:30, height: 20, backgroundColor: "blue"}}/>
+        </TouchableOpacity>
         <TouchableOpacity       // 2
-          title="       "
           onPress={() => {
             props.bota(2)
           }}
           disabled={props.ver(2)}
-          style={{backgroundColor:"white", width: 20}}      
+          style={[styles.testes]}     
         >
-          <Text></Text></TouchableOpacity>
-        <TouchableOpacity       // 3
-          title="       "
+          <Image resizeMode="stretch" source={botao} 
+            style={{width:30, height: 20, backgroundColor: "red"}}/>
+        </TouchableOpacity>
+        <TouchableOpacity     // 3
           onPress={() => {
             props.bota(3)
           }}
           disabled={props.ver(3)}
-          style={{backgroundColor:"white", width: 20}}        
+          style={[styles.testes]}        
         >
-          <Text></Text></TouchableOpacity>
+          <Image resizeMode="stretch" source={botao} 
+            style={{width:30, height: 20, backgroundColor: "green"}}/>
+        </TouchableOpacity>
       </View>
       <View style={styles.line}>
         <TouchableOpacity       // 4
-          title="       "
           onPress={() => {
             props.bota(4)
           }}
           disabled={props.ver(4)}
-          style={{backgroundColor:"white", width: 20}}
+          style={[styles.testes]}
         >
-          <Text></Text></TouchableOpacity>
+          <Image resizeMode="stretch" source={botao} 
+            style={{width:30, height: 20, backgroundColor: "yellow"}}/>
+          </TouchableOpacity>
         <TouchableOpacity       // 5
-          title="       "
           onPress={() => {
             props.bota(5)
           }}
           disabled={props.ver(5)}
-          style={{backgroundColor:"white", width: 20}}        
+          style={[styles.testes]}        
         >
-          <Text></Text></TouchableOpacity>
+          <Image resizeMode="stretch" source={botao} 
+            style={{width:30, height: 20, backgroundColor: "brown"}}/>
+        </TouchableOpacity>
         <TouchableOpacity       // 6
-          title="       "
           onPress={() => {
             props.bota(6)
           }}
           disabled={props.ver(6)}
-          style={{backgroundColor:"white", width: 20}}       
+          style={[styles.testes]}      
         >
-          <Text></Text></TouchableOpacity>
+          <Image resizeMode="stretch" source={botao} 
+            style={{width:30, height: 20, backgroundColor: "gray"}}/>
+        </TouchableOpacity>
         <TouchableOpacity       // 7
-          title="       "
           onPress={() => {
             props.bota(7)
           }}
           disabled={props.ver(7)}
-          style={{backgroundColor:"white", width: 20}}
+          style={[styles.testes]}
         >
-          <Text></Text></TouchableOpacity>
+          <Image resizeMode="stretch" source={botao} 
+            style={{width:30, height: 20, backgroundColor: "purple"}}/>
+        </TouchableOpacity>
       </View>
       <View style={styles.line}>
         <TouchableOpacity       // Delet
-          title="Del"
           onPress={() => {
             props.dell()
           }}
-          style={{backgroundColor:"white", width: 20}}
+          style={[styles.testes]}
         >
-          <Text></Text></TouchableOpacity>
+          <Image resizeMode="stretch" source={botao} 
+            style={{width:30, height: 20, backgroundColor: "darkslategrey"}}/>
+        </TouchableOpacity>
         <TouchableOpacity       // 8
-          title="       "
           onPress={() => {
             props.bota(8)
           }}
           disabled={props.ver(8)}
-          style={{backgroundColor:"white", width: 20}}
+          style={[styles.testes]}
         >
-          <Text></Text></TouchableOpacity>
+          <Image resizeMode="stretch" source={botao} 
+            style={{width:30, height: 20, backgroundColor: "violet"}}/>
+        </TouchableOpacity>
         <TouchableOpacity       // 9
-          title="       "
           onPress={() => {
             props.bota(9)
           }}
           disabled={props.ver(9)}
-          style={{backgroundColor:"white", width: 20}}
+          style={[styles.testes]}
         >
-          <Text></Text></TouchableOpacity>
+          <Image resizeMode="stretch" source={botao} 
+            style={{width:30, height: 20, backgroundColor: "aqua"}}/>
+        </TouchableOpacity>
         <TouchableOpacity       // Go!
-          title=" Go "
           onPress={() => {
-            props.save()
-          }}
-          disabled={props.ver(-1)}
-          style={{backgroundColor:"white", width: 20}}
+              props.save()
+            }}
+          disabled={!props.ver(-1)}
+          style={[styles.testes]}
         >
-          <Text></Text></TouchableOpacity>
+          <Image resizeMode="stretch" source={botao} 
+            style={{width:30, height: 20, backgroundColor: "lightgreen"}}/>
+        </TouchableOpacity>
       </View>
-      <View style={[styles.line,{marginTop: 15}]}>
+      <View style={styles.line}>
         <TouchableOpacity       // Clear
-          title="       CLear       "
           onPress={() => {
             props.limpa()
           }}
-          style={{backgroundColor:"white", width: 20}}    
+          style={styles.buttons}
         >
-          <Text></Text></TouchableOpacity>
+          <Image resizeMode="stretch" source={botao} 
+            style={{width:50, height: 20, backgroundColor: "white"}}/>
+        </TouchableOpacity>
       </View>
     </View>
   )

@@ -122,21 +122,23 @@ export default function Frame(props) {
 
   return (
     <View style={styles.boxFrame} >
-      <ImageBackground source={require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/bomb.png')}
-        style={styles.bomb}
-      >
-        {props.rodada%2 === 1 ?
-          <Text style={{paddingRight: 15, fontSize: 50 }}>
-          {"0" + minutesW}:
-          {secondsW< 10 ? "0" + secondsW : secondsW}
-          </Text>
-          :
-          <Text style={{paddingRight: 15, fontSize: 50 }}>
-            {"0" + minutesH}:
-            {secondsH < 10 ? "0" + secondsH : secondsH}
-          </Text>
-        }
-      </ImageBackground>
+      <View style={styles.bombBox}>  
+        <ImageBackground resizeMode="stretch" source={require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/bomb.png')}
+          style={styles.bomb}
+        >
+          {props.rodada%2 === 1 ?
+            <Text style={styles.timer}>
+            {"0" + minutesW}:
+            {secondsW< 10 ? "0" + secondsW : secondsW}
+            </Text>
+            :
+            <Text style={styles.timer}>
+              {"0" + minutesH}:
+              {secondsH < 10 ? "0" + secondsH : secondsH}
+            </Text>
+          }
+        </ImageBackground>
+      </View>
       <View style={styles.boxWires}>
         <Image source={fios[0]} style={[styles.wire, {backgroundColor:"white"}]} />
         <Image source={fios[1]} style={[styles.wire, {backgroundColor:"blue"}]} />

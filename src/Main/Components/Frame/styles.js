@@ -4,14 +4,19 @@ const styles = StyleSheet.create({
   boxFrame:{
     flex: 2,
     backgroundColor: "white",
-    marginBottom: 2,
+  },
+  bombBox:{
+    flex: 1
   },
   bomb:{
-    width: "100%",
-    height: 225,
-    backgroundColor: "gray",
+    flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
+  },
+  timer:{
+    color: "darkgreen",
+    fontSize: 50,
+    paddingTop: 8
   },
   boxWires:{
     flex: 1,
