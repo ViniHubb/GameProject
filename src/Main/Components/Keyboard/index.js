@@ -4,13 +4,22 @@ import styles from "./styles"
 
 export default function Keyboard(props) {
 
-  const [botao, setBotao] = useState(require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/sombra.png'))
+  const botao = require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/sombra.png')
+  const botaoPress = require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/sombraPress.png')
+  const [botoes, setBotoes] = useState([botao,botao,botao,botao,botao,botao,botao,botao,botao,botao,botao,botao,botao])
 
-  function verifica(number) {        // Funcao para garantir que o numero so seja apertado uma vez
-    if (props.tenta.includes(number)) {
-      return require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/sombraPress.png')
-    }
-    return require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/sombra.png')
+  function press(number) {        // Funcao para garantir que o numero so seja apertado uma vez
+    console.log('Test sucess');
+    let newBotoes = [...botoes]
+    newBotoes[number] = botaoPress
+    setBotoes(newBotoes)
+  }
+
+  function desPress(){
+    console.log('Test sucess 222');
+    let newBotoes = [...botoes]
+    newBotoes[props.tenta[props.tenta.length -1]] = botao
+    setBotoes(newBotoes)
   }
 
   return (
@@ -25,7 +34,7 @@ export default function Keyboard(props) {
           activeOpacity={1}
         >
           <Image resizeMode="stretch" source={require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/sombra.png')}
-          style={{width:30, height: 20, backgroundColor: "white"}}/>
+          style={{width:30, height: 25, backgroundColor: "white"}}/>
         </TouchableOpacity>
         <TouchableOpacity       // 1
           onPress={() => {
@@ -36,7 +45,7 @@ export default function Keyboard(props) {
           style={[styles.testes]}       
         >
           <Image resizeMode="stretch" source={require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/sombraPress.png')} 
-          style={{width:30, height: 20, backgroundColor: "blue"}}/>
+          style={{width:30, height: 25, backgroundColor: "blue"}}/>
         </TouchableOpacity>
         <TouchableOpacity       // 2
           onPress={() => {
@@ -63,74 +72,80 @@ export default function Keyboard(props) {
         <TouchableOpacity       // 4
           onPress={() => {
             props.bota(4)
+            press(4)
           }}
           disabled={props.ver(4)}
           style={[styles.testes]}
         >
-          <Image resizeMode="stretch" source={botao} 
+          <Image resizeMode="stretch" source={botoes[4]} 
             style={{width:30, height: 25, backgroundColor: "yellow"}}/>
           </TouchableOpacity>
         <TouchableOpacity       // 5
           onPress={() => {
             props.bota(5)
-            verifica(5)
+            press(5)
           }}
           disabled={props.ver(5)}
           style={[styles.testes]}        
         >
-          <Image resizeMode="stretch" source={botao} 
+          <Image resizeMode="stretch" source={botoes[5]} 
             style={{width:30, height: 25, backgroundColor: "brown"}}/>
         </TouchableOpacity>
         <TouchableOpacity       // 6
           onPress={() => {
             props.bota(6)
+            press(6)
           }}
           disabled={props.ver(6)}
           style={[styles.testes]}      
         >
-          <Image resizeMode="stretch" source={botao} 
-            style={{width:30, height: 20, backgroundColor: "gray"}}/>
+          <Image resizeMode="stretch" source={botoes[6]} 
+            style={{width:30, height: 25, backgroundColor: "gray"}}/>
         </TouchableOpacity>
         <TouchableOpacity       // 7
           onPress={() => {
             props.bota(7)
+            press(7)
           }}
           disabled={props.ver(7)}
           style={[styles.testes]}
         >
-          <Image resizeMode="stretch" source={botao} 
-            style={{width:30, height: 20, backgroundColor: "purple"}}/>
+          <Image resizeMode="stretch" source={botoes[7]} 
+            style={{width:30, height: 25, backgroundColor: "purple"}}/>
         </TouchableOpacity>
       </View>
       <View style={styles.line}>
         <TouchableOpacity       // Delet
           onPress={() => {
             props.dell()
+            desPress()
           }}
           style={[styles.testes]}
         >
-          <Image resizeMode="stretch" source={botao} 
-            style={{width:30, height: 20, backgroundColor: "darkslategrey"}}/>
+          <Image resizeMode="stretch" source={botoes[10]} 
+            style={{width:30, height: 25, backgroundColor: "darkslategrey"}}/>
         </TouchableOpacity>
         <TouchableOpacity       // 8
           onPress={() => {
             props.bota(8)
+            press(8)
           }}
           disabled={props.ver(8)}
           style={[styles.testes]}
         >
-          <Image resizeMode="stretch" source={botao} 
-            style={{width:30, height: 20, backgroundColor: "violet"}}/>
+          <Image resizeMode="stretch" source={botoes[8]} 
+            style={{width:30, height: 25, backgroundColor: "violet"}}/>
         </TouchableOpacity>
         <TouchableOpacity       // 9
           onPress={() => {
             props.bota(9)
+            press(9)
           }}
           disabled={props.ver(9)}
           style={[styles.testes]}
         >
-          <Image resizeMode="stretch" source={botao} 
-            style={{width:30, height: 20, backgroundColor: "aqua"}}/>
+          <Image resizeMode="stretch" source={botoes[9]} 
+            style={{width:30, height: 25, backgroundColor: "aqua"}}/>
         </TouchableOpacity>
         <TouchableOpacity       // Go!
           onPress={() => {
@@ -139,8 +154,8 @@ export default function Keyboard(props) {
           disabled={!props.ver(-1)}
           style={[styles.testes]}
         >
-          <Image resizeMode="stretch" source={botao} 
-            style={{width:30, height: 20, backgroundColor: "lightgreen"}}/>
+          <Image resizeMode="stretch" source={botoes[11]} 
+            style={{width:30, height: 25, backgroundColor: "lightgreen"}}/>
         </TouchableOpacity>
       </View>
       <View style={styles.line}>
@@ -150,8 +165,8 @@ export default function Keyboard(props) {
           }}
           style={styles.buttons}
         >
-          <Image resizeMode="stretch" source={botao} 
-            style={{width:50, height: 20, backgroundColor: "white"}}/>
+          <Image resizeMode="stretch" source={botoes[12]} 
+            style={{width:50, height: 25, backgroundColor: "white"}}/>
         </TouchableOpacity>
       </View>
     </View>

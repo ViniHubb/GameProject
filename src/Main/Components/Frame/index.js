@@ -67,13 +67,13 @@ export default function Frame(props) {
     }
   }
 
-  const clear = () => {
-    stopTimer()
-    setSecondsH(0)
-    setMinutesH(1)
-    setSecondsW(0)
-    setMinutesW(1)
-  }
+  // const clear = () => {
+  //   stopTimer()
+  //   setSecondsH(0)
+  //   setMinutesH(1)
+  //   setSecondsW(0)
+  //   setMinutesW(1)
+  // }
 
   useEffect(() => {     // Tempo acabou, bomba explodiu
     if (!secondsH && !minutesH) {
