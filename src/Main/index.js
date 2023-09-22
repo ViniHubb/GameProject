@@ -191,6 +191,7 @@ export default function Main({ navigation }) {
         bomba={bomb}
       />
       <Keyboard
+        tenta={palpite}
         bota={preenche}
         ver={verifica}
         dell={delet}

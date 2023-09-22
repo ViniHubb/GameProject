@@ -6,6 +6,13 @@ export default function Keyboard(props) {
 
   const [botao, setBotao] = useState(require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/sombra.png'))
 
+  function verifica(number) {        // Funcao para garantir que o numero so seja apertado uma vez
+    if (props.tenta.includes(number)) {
+      return require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/sombraPress.png')
+    }
+    return require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/sombra.png')
+  }
+
   return (
     <View style={styles.boxButtons}>
       <View style={styles.line}>
@@ -28,7 +35,7 @@ export default function Keyboard(props) {
           disabled={props.ver(1)}
           style={[styles.testes]}       
         >
-          <Image resizeMode="stretch" source={botao} 
+          <Image resizeMode="stretch" source={require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/sombraPress.png')} 
           style={{width:30, height: 20, backgroundColor: "blue"}}/>
         </TouchableOpacity>
         <TouchableOpacity       // 2
@@ -38,8 +45,8 @@ export default function Keyboard(props) {
           disabled={props.ver(2)}
           style={[styles.testes]}     
         >
-          <Image resizeMode="stretch" source={botao} 
-            style={{width:30, height: 20, backgroundColor: "red"}}/>
+          <Image resizeMode="stretch" source={require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/sombra2.png')} 
+            style={{width:30, height: 25, backgroundColor: "red"}}/>
         </TouchableOpacity>
         <TouchableOpacity     // 3
           onPress={() => {
@@ -48,8 +55,8 @@ export default function Keyboard(props) {
           disabled={props.ver(3)}
           style={[styles.testes]}        
         >
-          <Image resizeMode="stretch" source={botao} 
-            style={{width:30, height: 20, backgroundColor: "green"}}/>
+          <Image resizeMode="stretch" source={require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/sombraPress2.png')} 
+            style={{width:30, height: 25, backgroundColor: "green"}}/>
         </TouchableOpacity>
       </View>
       <View style={styles.line}>
@@ -61,17 +68,18 @@ export default function Keyboard(props) {
           style={[styles.testes]}
         >
           <Image resizeMode="stretch" source={botao} 
-            style={{width:30, height: 20, backgroundColor: "yellow"}}/>
+            style={{width:30, height: 25, backgroundColor: "yellow"}}/>
           </TouchableOpacity>
         <TouchableOpacity       // 5
           onPress={() => {
             props.bota(5)
+            verifica(5)
           }}
           disabled={props.ver(5)}
           style={[styles.testes]}        
         >
           <Image resizeMode="stretch" source={botao} 
-            style={{width:30, height: 20, backgroundColor: "brown"}}/>
+            style={{width:30, height: 25, backgroundColor: "brown"}}/>
         </TouchableOpacity>
         <TouchableOpacity       // 6
           onPress={() => {
