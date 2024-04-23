@@ -7,15 +7,13 @@ export default function Keyboard(props) {
   const botoes = "C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/numeros/"
 
   const [cores, setCores] = useState([
-    ["white", "blue", "red", "green", "yellow", "saddlebrown", "slategray", "indigo", "magenta", "aqua", "darkslategrey", "lime"],
-    ["", "", "", "", "", "", "", "", "", "", "", ""]
+    ["white", "blue", "red", "green", "yellow", "saddlebrown", "slategray", "indigo", "magenta", "aqua", "darkslategrey", "black"],
+    ["white", "blue", "red", "green", "yellow", "saddlebrown", "slategray", "indigo", "magenta", "aqua", "darkslategrey", "black"]
   ])
 
   function press(number) {
     setCores(prevCores => {
-      const aux = prevCores[0][number]
       prevCores[0][number] = "black"
-      prevCores[1][number] = aux
       return prevCores
     })
   }
@@ -24,12 +22,11 @@ export default function Keyboard(props) {
     setCores(prevCores => {  
       if(number) {
         prevCores[0][props.tenta[props.tenta.length -1]] = prevCores[1][props.tenta[props.tenta.length -1]]
-        prevCores[1][props.tenta[props.tenta.length -1]] = ""
+        prevCores[0][10] = "darkslategrey"
+        prevCores[0][11] = "black"
       } else {
         for(let i=0; i < 10; i++) {
-          if (prevCores[1][i]){
-            prevCores[0][i] = prevCores[1][i]
-          }
+          prevCores[0][i] = prevCores[1][i]
         }
       }
       return prevCores
@@ -121,7 +118,7 @@ export default function Keyboard(props) {
             ></Pressable>
           </ImageBackground>
           <ImageBackground resizeMode="stretch" source={require(botoes+"7.png")}
-          style={[styles.buttons, {backgroundColor:cores[0][7]}]}>
+            style={[styles.buttons, {backgroundColor:cores[0][7]}]}>
             <Pressable       // 7
               onPress={() => {
                 props.bota(7)
@@ -147,7 +144,7 @@ export default function Keyboard(props) {
               ></Pressable>
             </ImageBackground>
           <ImageBackground resizeMode="stretch" source={require(botoes+"8.png")}
-          style={[styles.buttons, {backgroundColor:cores[0][8]}]}>
+            style={[styles.buttons, {backgroundColor:cores[0][8]}]}>
             <Pressable       // 8
               onPress={() => {
                 props.bota(8)
@@ -158,25 +155,25 @@ export default function Keyboard(props) {
             ></Pressable>
           </ImageBackground>
           <ImageBackground resizeMode="stretch" source={require(botoes+"9.png")}
-          style={[styles.buttons, {backgroundColor:cores[0][9]}]}>
+            style={[styles.buttons, {backgroundColor:cores[0][9]}]}>
             <Pressable       // 9
               onPress={() => {
                 props.bota(9)
                 press(9)
               }}
-              disabled={props.ver(0)}
+              disabled={props.ver(9)}
               style={[styles.testes]}
             ></Pressable>
           </ImageBackground>
           <ImageBackground resizeMode="stretch" source={require(botoes+"11.png")}  // botoes[11]
-          style={[styles.buttons, {backgroundColor:cores[0][11]}]}>
+          style={[styles.buttons,  {backgroundColor:cores[0][11]}]}>
             <Pressable       // Go!
-            onPress={() => {
-                props.save()
-                desPress(0)
-              }}
-            disabled={!props.ver(-1)}
-            style={[styles.testes]}
+              onPress={() => {
+                  props.save()
+                  desPress(0)
+                }}
+              disabled={!props.ver(-1)}
+              style={[styles.testes]}
             ></Pressable>
           </ImageBackground>
           {/* <ImageBackground resizeMode="stretch" source={require(botoes+"0.png")}  // botoes[0]

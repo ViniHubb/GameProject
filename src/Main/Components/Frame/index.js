@@ -103,11 +103,11 @@ export default function Frame(props) {
 
   useEffect(() => {       // Função que troca os relogios
     if(props.rodada === 2){
-      startTimer()
+      //startTimer()
     } else if(props.rodada > 2){
       stopTimer()
       setTimeout(() => {
-        startTimer()
+        //startTimer()
       },2000)
     }
   },[props.rodada])
