@@ -4,36 +4,28 @@ import styles from "./styles"
 
 export default function Keyboard(props) {
 
-  const botoes = "C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/numeros/"
-
-  const [cores, setCores] = useState([
-    ["white", "blue", "red", "green", "yellow", "saddlebrown", "slategray", "indigo", "magenta", "aqua", "darkslategrey", "lime"],
-    ["", "", "", "", "", "", "", "", "", "", "", ""]
-  ])
+  const botao = require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/botao.png')
+  const botaoPress = require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/newBotaoBorda.png')
+  const [botoes, setBotoes] = useState([botao,botao,botao,botao,botao,botao,botao,botao,botao,botao,botao,botao,botao])
 
   function press(number) {
-    setCores(prevCores => {
-      const aux = prevCores[0][number]
-      prevCores[0][number] = "black"
-      prevCores[1][number] = aux
-      return prevCores
-    })
+    let newBotoes = [...botoes]
+    newBotoes[number] = botaoPress
+    setBotoes(newBotoes)
   }
 
   function desPress(number) {
-    setCores(prevCores => {  
-      if(number) {
-        prevCores[0][props.tenta[props.tenta.length -1]] = prevCores[1][props.tenta[props.tenta.length -1]]
-        prevCores[1][props.tenta[props.tenta.length -1]] = ""
-      } else {
-        for(let i=0; i < 10; i++) {
-          if (prevCores[1][i]){
-            prevCores[0][i] = prevCores[1][i]
-          }
-        }
+    let newBotoes = [...botoes]
+    if(number) {
+      newBotoes[10] = botao
+      newBotoes[props.tenta[props.tenta.length -1]] = botao
+      setBotoes(newBotoes)
+    } else {
+      for(let i=0; i < 10; i++) {
+        newBotoes[i] = botao
+        setBotoes(newBotoes)
       }
-      return prevCores
-    })
+    }
   }
 
   return (
@@ -41,8 +33,8 @@ export default function Keyboard(props) {
       <ImageBackground resizeMode="stretch" source={require("C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/placa4.png")}
       style={styles.boxButtons}>
         <View style={styles.line}>
-          <ImageBackground resizeMode="stretch" source={require(botoes+"0.png")}
-                style={[styles.buttons, {backgroundColor:cores[0][0]}]}>
+          <ImageBackground resizeMode="stretch" source={botoes[0]}
+                style={[styles.buttons, {backgroundColor:"white"}]}>
             <Pressable       // 0
               onPress={() => {
                 props.bota(0)
@@ -50,10 +42,11 @@ export default function Keyboard(props) {
               }}
               disabled={props.ver(0)}
               style={[styles.testes]}
-            ></Pressable>
+            >
+            </Pressable>
           </ImageBackground>
-          <ImageBackground resizeMode="stretch" source={require(botoes+"1.png")}
-                style={[styles.buttons, {backgroundColor:cores[0][1]}]}>
+          <ImageBackground resizeMode="stretch" source={botoes[1]}
+                style={[styles.buttons, {backgroundColor:"blue"}]}>
             <Pressable       // 1
               onPress={() => {
                 props.bota(1)
@@ -63,8 +56,8 @@ export default function Keyboard(props) {
               style={[styles.testes]}
             ></Pressable>
           </ImageBackground>
-          <ImageBackground resizeMode="stretch" source={require(botoes+"2.png")}
-                style={[styles.buttons, {backgroundColor:cores[0][2]}]}>
+          <ImageBackground resizeMode="stretch" source={botoes[2]}
+                style={[styles.buttons, {backgroundColor:"red"}]}>
             <Pressable       // 2
               onPress={() => {
                 props.bota(2)
@@ -74,8 +67,8 @@ export default function Keyboard(props) {
               style={[styles.testes]}
             ></Pressable>
           </ImageBackground>
-          <ImageBackground resizeMode="stretch" source={require(botoes+"3.png")}
-                style={[styles.buttons, {backgroundColor:cores[0][3]}]}>
+          <ImageBackground resizeMode="stretch" source={botoes[3]}
+                style={[styles.buttons, {backgroundColor:"green"}]}>
             <Pressable       // 3
               onPress={() => {
                 props.bota(3)
@@ -87,8 +80,8 @@ export default function Keyboard(props) {
           </ImageBackground>
         </View>
         <View style={styles.line}>
-          <ImageBackground resizeMode="stretch" source={require(botoes+"4.png")}
-          style={[styles.buttons, {backgroundColor:cores[0][4]}]}>
+          <ImageBackground resizeMode="stretch" source={botoes[4]}
+          style={styles.buttons}>
             <Pressable       // 4
               onPress={() => {
                 props.bota(4)
@@ -98,8 +91,8 @@ export default function Keyboard(props) {
               style={[styles.testes]}
             ></Pressable>
           </ImageBackground>
-          <ImageBackground resizeMode="stretch" source={require(botoes+"5.png")}
-          style={[styles.buttons, {backgroundColor:cores[0][5]}]}>
+          <ImageBackground resizeMode="stretch" source={botoes[5]}
+          style={styles.buttons}>
             <Pressable       // 5
               onPress={() => {
                 props.bota(5)
@@ -109,8 +102,8 @@ export default function Keyboard(props) {
               style={[styles.testes]}
             ></Pressable>
           </ImageBackground>
-          <ImageBackground resizeMode="stretch" source={require(botoes+"6.png")}
-          style={[styles.buttons, {backgroundColor:cores[0][6]}]}>
+          <ImageBackground resizeMode="stretch" source={botoes[6]}
+          style={styles.buttons}>
             <Pressable       // 6
               onPress={() => {
                 props.bota(6)
@@ -120,8 +113,8 @@ export default function Keyboard(props) {
               style={[styles.testes]}
             ></Pressable>
           </ImageBackground>
-          <ImageBackground resizeMode="stretch" source={require(botoes+"7.png")}
-          style={[styles.buttons, {backgroundColor:cores[0][7]}]}>
+          <ImageBackground resizeMode="stretch" source={botoes[7]}
+          style={styles.buttons}>
             <Pressable       // 7
               onPress={() => {
                 props.bota(7)
@@ -133,8 +126,8 @@ export default function Keyboard(props) {
           </ImageBackground>
         </View>
         <View style={styles.line}>
-          <ImageBackground resizeMode="stretch" source={require(botoes+"10.png")}  // botoes[10]
-            style={[styles.buttons, {backgroundColor:cores[0][10]}]}>
+          <ImageBackground resizeMode="stretch" source={botoes[10]}  // botoes[10]
+            style={styles.buttons}>
               <Pressable       // Delet
                 onPressIn={() => {
                   press(10)
@@ -146,8 +139,8 @@ export default function Keyboard(props) {
                 style={[styles.testes]}
               ></Pressable>
             </ImageBackground>
-          <ImageBackground resizeMode="stretch" source={require(botoes+"8.png")}
-          style={[styles.buttons, {backgroundColor:cores[0][8]}]}>
+          <ImageBackground resizeMode="stretch" source={botoes[8]}
+          style={styles.buttons}>
             <Pressable       // 8
               onPress={() => {
                 props.bota(8)
@@ -157,8 +150,8 @@ export default function Keyboard(props) {
               style={[styles.testes]}
             ></Pressable>
           </ImageBackground>
-          <ImageBackground resizeMode="stretch" source={require(botoes+"9.png")}
-          style={[styles.buttons, {backgroundColor:cores[0][9]}]}>
+          <ImageBackground resizeMode="stretch" source={botoes[9]}
+          style={styles.buttons}>
             <Pressable       // 9
               onPress={() => {
                 props.bota(9)
@@ -168,8 +161,8 @@ export default function Keyboard(props) {
               style={[styles.testes]}
             ></Pressable>
           </ImageBackground>
-          <ImageBackground resizeMode="stretch" source={require(botoes+"11.png")}  // botoes[11]
-          style={[styles.buttons, {backgroundColor:cores[0][11]}]}>
+          <ImageBackground resizeMode="stretch" source={botoes[11]}  // botoes[11]
+          style={styles.buttons}>
             <Pressable       // Go!
             onPress={() => {
                 props.save()
@@ -179,7 +172,7 @@ export default function Keyboard(props) {
             style={[styles.testes]}
             ></Pressable>
           </ImageBackground>
-          {/* <ImageBackground resizeMode="stretch" source={require(botoes+"0.png")}  // botoes[0]
+          <ImageBackground resizeMode="stretch" source={botoes[12]}  // botoes[0]
           style={styles.buttons}>
             <Pressable       // Clear
             onPress={() => {
@@ -188,7 +181,7 @@ export default function Keyboard(props) {
             style={styles.testes}
           >
           </Pressable>
-          </ImageBackground> */}
+          </ImageBackground>
         </View>
       </ImageBackground>
     </View>

@@ -12,15 +12,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   buttons:{
-    backgroundColor: "white",
-    paddingVertical: 0,
-    paddingHorizontal: 0,
-    borderRadius: 20  
+    marginVertical: 5,
+    marginHorizontal: 5,
+    borderRadius: 200
   },
   testes:{
     //backgroundColor: "blue",
-    paddingVertical: 20,
-    paddingHorizontal: 20,
+    paddingVertical: 25,
+    paddingHorizontal: 25,
   }
 })
 
