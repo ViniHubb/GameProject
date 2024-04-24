@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react"
-import { View, Text, Button } from "react-native"
+import { View, Text, Button, Image } from "react-native"
 import styles from "./styles"
 
-export default function Feedback({ navigation, route }) {
+export default function Feedback({ navigation, route }) { //route.params.palpite -> vetor
 
   const [able, setAble] = useState(true)
+  const [cores, setCores] = useState(["white", "blue", "red", "green", "yellow", "saddlebrown", "slategray", "indigo", "magenta", "aqua", "darkslategrey", "black"])
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -15,15 +17,22 @@ export default function Feedback({ navigation, route }) {
   return (
     <View style={styles.boxFeedback}>
       {route.params.misses || route.params.hits ?
-        <View style={styles.try}>
-          <Text>Super Hit: {route.params.superHits}</Text>
-          <Text>Hit: {route.params.hits}</Text>
-          <Text>Miss: {route.params.misses}</Text>
-          <Button
-            title="OK"
-            onPress={() => navigation.navigate("Main")}
-            disabled={able}
-          />
+        <View>
+          <View style={styles.try}>
+            <View style={styles.palpite}>
+              {route.params.palpite.map((numero) => (
+                <Text key={numero} style={[styles.numero, {color:cores[numero]}]}>{numero}</Text>
+              ))}
+            </View>
+            <Text>Super Hit: {route.params.superHits}</Text>
+            <Text>Hit: {route.params.hits}</Text>
+            <Text>Miss: {route.params.misses}</Text>
+            <Button
+              title="OK"
+              onPress={() => navigation.navigate("Main")}
+              disabled={able}
+            />
+          </View>
         </View>
         :
         <View>

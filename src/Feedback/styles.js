@@ -8,15 +8,29 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "lightgray",
   },
+
+  palpite:{
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    backgroundColor: "aqua",
+  },
+  numero:{
+    fontSize: 60,
+    fontWeight: "bold",
+    backgroundColor: "lime",
+    padding: 10,
+  },
+
   try:{
-    height: 120,
+    display: "flex",
     justifyContent: "space-between",
+    backgroundColor: "red",
   },
   escolhas:{
     flexDirection: "row",
     alignItems: "center", 
     justifyContent: "space-between",
-    paddingVertical: 10
   }
 })
 

@@ -67,7 +67,7 @@ export default function Frame(props) {
     }
   }
 
-  // const clear = () => {
+  // const clear = () => {  //Limpa o palpite
   //   stopTimer()
   //   setSecondsH(0)
   //   setMinutesH(1)

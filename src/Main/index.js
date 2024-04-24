@@ -65,7 +65,6 @@ export default function Main({ navigation }) {
         tentativa(watson)  
       }
     }
-    setPalpite([])
   }
 
   function clear() {       // Funcao para o botao limpar 
@@ -154,13 +153,13 @@ export default function Main({ navigation }) {
 
   useEffect(() => {     // Envia para "Fedback" as informações necessarias, sem delay
     if (round > 2 || superHit >= level-1) {
-      console.log(superHit)
       navigation.navigate("Feedback", {
         superHits: superHit,
         hits: hit,
         misses: miss,
         renome: nome,
         holmesP: holmes,
+        palpite: palpite,
         watsonP: watson,
         nivel: level,
         pontosTotaisH: pontosH,
@@ -171,6 +170,7 @@ export default function Main({ navigation }) {
         clear()
       }
     }
+    setPalpite([])
   },[round])
 
   return (
