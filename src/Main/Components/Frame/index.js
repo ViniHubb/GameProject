@@ -4,7 +4,6 @@ import styles from "./styles";
 
 export default function Frame(props) {
 
-  const [fios, setFios] = useState([])
   const [minutesH, setMinutesH] = useState(1)
   const [secondsH, setSecondsH] = useState(0)
   const [minutesW, setMinutesW] = useState(1)
@@ -88,20 +87,7 @@ export default function Frame(props) {
     console.log(props.rodada)
   }, [secondsH, secondsW])
 
-  useEffect(() => {     // Essa função mostra se o fio esta cortado ou não
-    let newFios = [...fios]
-    for (let i = 0; i < 10; i++) {
-      if (props.valor.includes(i)) {
-        newFios[i] = require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/fioCorte.png')
-        setFios(newFios)
-      } else {
-        newFios[i] = require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/fio.png')
-        setFios(newFios)
-      }
-    }
-  }, [props.valor])
-
-  useEffect(() => {       // Função que troca os relogios
+  useEffect(() => { // Função que troca os relogios
     if(props.rodada === 2){
       //startTimer()
     } else if(props.rodada > 2){
@@ -122,8 +108,7 @@ export default function Frame(props) {
 
   return (
     <View style={styles.boxFrame} >
-      <View style={styles.bombBox}>  
-        <ImageBackground resizeMode="stretch" source={require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/bomb.png')}
+      <ImageBackground resizeMode="stretch" source={require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/bomba.png')}
           style={styles.bomb}
         >
           {props.rodada%2 === 1 ?
@@ -138,19 +123,6 @@ export default function Frame(props) {
             </Text>
           }
         </ImageBackground>
-      </View>
-      <View style={styles.boxWires}>
-        <Image source={fios[0]} style={[styles.wire, {backgroundColor:"white"}]} />
-        <Image source={fios[1]} style={[styles.wire, {backgroundColor:"blue"}]} />
-        <Image source={fios[2]} style={[styles.wire, {backgroundColor:"red"}]} />
-        <Image source={fios[3]} style={[styles.wire, {backgroundColor:"green"}]} />
-        <Image source={fios[4]} style={[styles.wire, {backgroundColor:"yellow"}]} />
-        <Image source={fios[5]} style={[styles.wire, {backgroundColor:"brown"}]} />
-        <Image source={fios[6]} style={[styles.wire, {backgroundColor:"gray"}]} />
-        <Image source={fios[7]} style={[styles.wire, {backgroundColor:"purple"}]} />
-        <Image source={fios[8]} style={[styles.wire, {backgroundColor:"violet"}]} />
-        <Image source={fios[9]} style={[styles.wire, {backgroundColor:"aqua"}]} />
-      </View>
       {/* <Button
         title="Descontar"
         onPress={() => {

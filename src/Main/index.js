@@ -18,19 +18,19 @@ export default function Main({ navigation }) {
   const [pontosH, setPontosH] = useState(0)       // Variavel para os pontos do jogador 1
   const [pontosW, setPontosW] = useState(0)      // Variavel para os pontos do jogador 2
 
-  function preenche(number) {        // Funcao para preencher a variavel 'palpite'
+  function preenche(number) { // Funcao para preencher a variavel 'palpite'
     let newPlapite = [...palpite]
     newPlapite.push(number)
     setPalpite(newPlapite)
   }
 
-  function delet() {                 // Funcao para deletar um numero
+  function delet() { // Funcao para deletar um numero
     let newPlapite = [...palpite]
     newPlapite.pop()
     setPalpite(newPlapite)
   }
 
-  function verifica(number) {        // Funcao para garantir que o numero so seja apertado uma vez
+  function verifica(number) { // Funcao para garantir que o numero so seja apertado uma vez
     let flag = false
     if (palpite.includes(number) || palpite.length >= level) {
       flag = true
@@ -38,7 +38,7 @@ export default function Main({ navigation }) {
     return flag
   }
 
-  function salvar() {             // Funcao para salvar o valor escolhido e enviar os palpites
+  function salvar() { // Funcao para salvar o valor escolhido e enviar os palpites
     if (round === 0) {
       setHolmes(palpite)
       setRound(round + 1)
@@ -67,7 +67,7 @@ export default function Main({ navigation }) {
     }
   }
 
-  function clear() {       // Funcao para o botao limpar 
+  function clear() { // Funcao para o botao limpar 
     setHolmes([])
     setWatson([])
     setPalpite([])
@@ -78,7 +78,7 @@ export default function Main({ navigation }) {
     setNome("Escolha um valor Holmes")
   }
 
-  function tentativa(holmesORwatson) {     // Funcao para calcular a tentativa do jogador atual
+  function tentativa(holmesORwatson) { // Funcao para calcular a tentativa do jogador atual
     const tentativ = holmesORwatson
     let SH = 0
     let H = 0
@@ -151,7 +151,7 @@ export default function Main({ navigation }) {
     }
   }
 
-  useEffect(() => {     // Envia para "Fedback" as informações necessarias, sem delay
+  useEffect(() => { // Envia para "Fedback" as informações necessarias, sem delay
     if (round > 2 || superHit >= level-1) {
       navigation.navigate("Feedback", {
         superHits: superHit,

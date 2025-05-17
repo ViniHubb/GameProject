@@ -1,13 +1,24 @@
-import React, { useEffect, useState } from "react"
-import { View, Text, Button, Image } from "react-native"
+import React, { useEffect, useState, useRef } from "react"
+import { View, Text, Button, ImageBackground } from "react-native"
 import styles from "./styles"
 
 export default function Feedback({ navigation, route }) { //route.params.palpite -> vetor
 
+  const [palpiteHistory, setPalpiteHistory] = useState([]);
+  const [superHitsHistory, setSuperHitsHistory] = useState([]);
+  const [hitsHistory, setHitsHistory] = useState([]);
+  const [missesHistory, setMissesHistory] = useState([]);
+
+useEffect(() => {
+  if (route.params?.palpite) {
+    setPalpiteHistory(prev => [...prev, route.params.palpite]);
+    setSuperHitsHistory(prev => [...prev, route.params.superHits]);
+    setHitsHistory(prev => [...prev, route.params.hits]);
+    setMissesHistory(prev => [...prev, route.params.misses]);
+  }
+}, [route.params.palpite]);
+
   const [able, setAble] = useState(true)
-  const [cores, setCores] = useState(["white", "blue", "red", "green", "yellow", "saddlebrown", "slategray", "indigo", "magenta", "aqua", "darkslategrey", "black"])
-
-
   useEffect(() => {
     setTimeout(() => {
       setAble(false)
@@ -16,82 +27,97 @@ export default function Feedback({ navigation, route }) { //route.params.palpite
 
   return (
     <View style={styles.boxFeedback}>
-      {route.params.misses || route.params.hits ?
-        <View>
-          <View style={styles.try}>
-            <View style={styles.palpite}>
-              {route.params.palpite.map((numero) => (
-                <Text key={numero} style={[styles.numero, {color:cores[numero]}]}>{numero}</Text>
-              ))}
-            </View>
-            <Text>Super Hit: {route.params.superHits}</Text>
-            <Text>Hit: {route.params.hits}</Text>
-            <Text>Miss: {route.params.misses}</Text>
-            <Button
-              title="OK"
-              onPress={() => navigation.navigate("Main")}
-              disabled={able}
-            />
-          </View>
-        </View>
-        :
-        <View>
-          {route.params.superHits > route.params.nivel-1 ?
-            <View>
-              <Text>A bomba explodiu, parabéns {route.params.renome}, você perdeu</Text>
-              <View style={styles.escolhas}>
-                <Text>Holmes: {route.params.holmesP}</Text>
-                <Text>Watson: {route.params.watsonP}</Text>
-              </View>
-              <View style={styles.escolhas}>
-                <Text>Pontos: {route.params.pontosTotaisH}</Text>
-                <Text>Pontos: {route.params.pontosTotaisW}</Text>
-              </View>
-              <Button
-                title="PROXIMO"
-                onPress={() => {
-                  if(route.params.nivel < 5) {
-                    navigation.navigate("Main")
-                  } else {
-                    navigation.navigate("Final", {
-                      nome: route.params.renome,
-                      holmes: route.params.pontosTotaisH,
-                      watson: route.params.pontosTotaisW
-                    })
-                  }
-                }}
-              />
-            </View>
-            :
-            <View>
-              <Text>Parabéns {route.params.renome}, você acertou</Text>
-              <View style={styles.escolhas}>
-                <Text>Holmes: {route.params.holmesP}</Text>
-                <Text>Watson: {route.params.watsonP}</Text>
-              </View>
-              <View style={styles.escolhas}>
-                <Text>Pontos: {route.params.pontosTotaisH}</Text>
-                <Text>Pontos: {route.params.pontosTotaisW}</Text>
-              </View>
-              <Button
-                title="PROXIMO"
-                onPress={() => {
-                  if(route.params.nivel < 5) {
-                    navigation.navigate("Main")
-                  } else {
-                    navigation.navigate("Final", {
-                      nome: route.params.renome,
-                      holmes: route.params.pontosTotaisH,
-                      watson: route.params.pontosTotaisW
-                    })
-                  }
-                }}
+      <ImageBackground resizeMode="stretch" source={require('C:/Users/Vinicius/Documents/Projects/GameProject/src/Images/cadernoCortado.png')}
+        style={styles.notepad}>
 
+        {route.params.misses || route.params.hits ?
+          <View>
+            <View style={styles.buttonOk}>
+              <Button
+                title="OK"
+                onPress={() => navigation.navigate("Main")}
+                disabled={able}
               />
             </View>
-          }
-        </View>
-      }
+              <View style={styles.try}>
+                <View style={styles.palpite}>
+                  {route.params.palpite.map((numero) => (
+                    <Text style={styles.number}>{numero} </Text>
+                  ))}
+                </View>
+                <View style={[{ flexDirection: "row" }]}>
+                  <Text style={[styles.feedbackSymbol, { color: "green" }]}>V= </Text> 
+                  <Text style={styles.feedbackNumber}>{route.params.superHits} </Text>
+                  <Text style={[styles.feedbackSymbol, { color: "orange" }]}>Z= </Text>
+                  <Text style={styles.feedbackNumber}>{route.params.hits} </Text>
+                  <Text style={[styles.feedbackSymbol, { color: "red" }]}>X= </Text>
+                  <Text style={styles.feedbackNumber}>{route.params.misses} </Text>
+                </View>
+              </View>
+          </View>
+          :
+          <View>
+            {route.params.superHits > route.params.nivel - 1 ?
+              <View>
+                <Text>A bomba explodiu, parabéns {route.params.renome}, você perdeu</Text>
+                <View style={styles.choicesBox}>
+                  <Text style={styles.choicesText}>Holmes: {route.params.holmesP}</Text>
+                  <Text style={styles.choicesText}>Watson: {route.params.watsonP}</Text>
+                </View>
+                <View style={styles.choicesBox}>
+                  <Text style={styles.choicesText}>Pontos: {route.params.pontosTotaisH}</Text>
+                  <Text style={styles.choicesText}>Pontos: {route.params.pontosTotaisW}</Text>
+                </View>
+                <View style={styles.buttonNextGame}>
+                  <Button
+                    title="PROXIMO"
+                    onPress={() => {
+                      if (route.params.nivel < 5) {
+                        navigation.navigate("Main")
+                      } else {
+                        navigation.navigate("Final", {
+                          nome: route.params.renome,
+                          holmes: route.params.pontosTotaisH,
+                          watson: route.params.pontosTotaisW
+                        })
+                      }
+                    }}
+                  />
+                </View>
+              </View>
+              :
+              <View style={styles.congratulationsBox}>
+                <Text style={styles.congratulationsText}>Parabéns {route.params.renome} </Text>
+                <Text style={styles.congratulationsText}>Bomba desarmada! </Text>
+                <View style={styles.choicesBox}>
+                  <Text style={styles.choicesText}>Holmes: {route.params.holmesP} {"\n"}Pontos: {route.params.pontosTotaisH} </Text>
+                  <Text style={styles.choicesText}>Watson: {route.params.watsonP} {"\n"}Pontos: {route.params.pontosTotaisW} </Text>
+                </View>
+                {/* <View style={styles.choicesBox}>
+                  <Text style={styles.choicesText}>Pontos: {route.params.pontosTotaisH}</Text>
+                  <Text style={styles.choicesText}>Pontos: {route.params.pontosTotaisW}</Text>
+                </View> */}
+                <View style={styles.buttonNextGame}>
+                  <Button
+                    title="PROXIMO"
+                    onPress={() => {
+                      if (route.params.nivel < 5) {
+                        navigation.navigate("Main")
+                      } else {
+                        navigation.navigate("Final", {
+                          nome: route.params.renome,
+                          holmes: route.params.pontosTotaisH,
+                          watson: route.params.pontosTotaisW
+                        })
+                      }
+                    }}
+                  />
+                </View>
+              </View>
+            }
+          </View>
+        }
+      </ImageBackground>
     </View>
   )
 }

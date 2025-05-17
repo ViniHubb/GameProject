@@ -2,24 +2,25 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   boxButtons:{
-    flex:1,
+    zIndex: 0,
     alignItems: "center",
-    paddingTop: 20
+    marginTop: 285
   },
   line:{
-    width: "90%",
+    width: "63%",
     justifyContent: "space-around",
     flexDirection: "row",
+
   },
   buttons:{
-    marginVertical: 5,
-    marginHorizontal: 5,
-    borderRadius: 200
+    marginBottom: 6,
+    marginHorizontal: 0,
+    borderRadius: 0,
   },
   testes:{
     //backgroundColor: "blue",
-    paddingVertical: 25,
-    paddingHorizontal: 25,
+    paddingVertical: 45,
+    paddingHorizontal: 40,
   }
 })
 
